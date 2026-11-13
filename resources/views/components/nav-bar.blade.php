@@ -19,19 +19,24 @@
     </div>
     @auth
         <div class="navbar-end gap-3">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                <div class="w-10 rounded-full">
-                    <img
-                        alt="Tailwind CSS Navbar component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                </div>
-            </div>
 
+            <div>
+                {{ Auth::user()->name }}
+            </div>
+            <a href="{{ route('welcome') }}">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img
+                            alt="Tailwind CSS Navbar component"
+                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    </div>
+                </div>
+            </a>
             <div>
                 <a class="justify-between">Profile</a>
             </div>
             <div>
-                <a href="{{ route('logout') }}" class="badge badge-error badge-outline w-full text-center">Logout</a>
+                <a href="{{ route('logout') }}" class="btn btn-error w-full text-center">Logout</a>
             </div>
 {{--            <a class="btn btn-error" href="{{ route('login') }}">Logout</a>--}}
         </div>

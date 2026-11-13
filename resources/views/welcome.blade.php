@@ -1,50 +1,38 @@
 <x-layout title="my page">
-    Hello
-    @auth
-        , {{ Auth::user()->name }}
-    @endauth
-    !
-    <div>
-        <h1>Your Courses:</h1>
-
-        @php
-            $user = Auth::user();
-            $subjects = $user->subjects;
-        @endphp
+    @php
+        $user = Auth::user();
+        $subjects = $user->subjects;
+    @endphp
+    <div class="text-4xl">
+        Your Courses:
     </div>
-
-    <div class="overflow-x-auto">
-        <table class="table">
-            <!-- head -->
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Grade</th>
-                <th>Note</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- row 1 -->
-            <tr class="bg-base-200">
+    <x-table.layout>
+        <x-table.head>
+            <th>Name</th>
+            <th>Mark</th>
+            <th>Grade</th>
+            <th>Note</th>
+        </x-table.head>
+        <x-table.body>
             @foreach($subjects as $subject)
-                @if($subject->pivot->mark >= 10)
-                    @php
-                        $badge_style = 'success';
-                        $cell_value = 'V';
-                    @endphp
-                @else
-                    @php
-                        $badge_style = 'error';
-                        $cell_value = 'NV';
-                    @endphp
-                @endif
-                <td>{{ $subject->title }}</td>
-                <td>{{ $subject->pivot->mark }}/20</td>
-                <td><span class="badge badge-{{ $badge_style }}">{{ $cell_value }}</span></td>
-                <td>{{ $subject->pivot->note }}</td>
-            </tr>
+            <x-table.row>
+                    @if($subject->pivot->mark >= 10)
+                        @php
+                            $badge_style = 'success';
+                            $cell_value = 'V';
+                        @endphp
+                    @else
+                        @php
+                            $badge_style = 'error';
+                            $cell_value = 'NV';
+                        @endphp
+                    @endif
+                    <td>{{ $subject->title }}</td>
+                    <td>{{ $subject->pivot->mark }}/20</td>
+                    <td><span class="badge badge-{{ $badge_style }}">{{ $cell_value }}</span></td>
+                    <td>{{ $subject->pivot->note }}</td>
+            </x-table.row>
             @endforeach
-            </tbody>
-        </table>
-    </div>
+        </x-table.body>
+    </x-table.layout>
 </x-layout>
