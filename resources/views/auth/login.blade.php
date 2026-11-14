@@ -13,4 +13,7 @@
             <button type="submit" class="btn btn-neutral mt-4">Login</button>
         </fieldset>
     </form>
+    @error('errors')
+        <div class="badge badge-error">{{ $message }}</div>
+    @enderror
 </x-layout>

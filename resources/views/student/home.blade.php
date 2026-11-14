@@ -35,4 +35,5 @@
             @endforeach
         </x-table.body>
     </x-table.layout>
+    <div>{{ $user->student }}</div>
 </x-layout>

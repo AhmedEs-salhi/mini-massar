@@ -32,21 +32,25 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
+
         $credentials = $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|string|max:100',
+            'role' => 'required|string|max:100',
             'password' => ['required', 'confirmed', Password::min(8)],
         ]);
 
         $user = User::create([
             'name' => $credentials['name'],
             'email' => $credentials['email'],
+            'role' => $credentials['role'],
             'password' => Hash::make($credentials['password'])
         ]);
 
         Auth::login($user);
+//        dd($request->all());
 
-        return redirect('welcome');
+        return redirect(strtolower(Auth::user()->role) . '/home');
     }
 
     /**

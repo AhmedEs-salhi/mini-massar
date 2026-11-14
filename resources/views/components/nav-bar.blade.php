@@ -23,7 +23,7 @@
             <div>
                 {{ Auth::user()->name }}
             </div>
-            <a href="{{ route('welcome') }}">
+            <a href="{{ route('home') }}">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                         <img

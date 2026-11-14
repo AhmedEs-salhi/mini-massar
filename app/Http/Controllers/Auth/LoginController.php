@@ -15,6 +15,7 @@ class LoginController extends Controller
     }
 
     public function authenticate(Request $request) {
+//        dd($request->user());
 
         $credentials = $request->validate([
             'email' => 'required|string|max:100',
@@ -23,8 +24,8 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->intended('/');
+//            dd(Auth::user());
+            return redirect(strtolower(Auth::user()->role) . '/home');
         }
 
         return back()->withErrors([

@@ -10,6 +10,13 @@
             <label class="label">Email</label>
             <input type="email" name="email" class="input w-full @error('email') input-error @enderror" placeholder="Email" />
 
+            <label class="label">Email</label>
+            <select name="role" id="role" class="select w-full">
+                @foreach(App\Enum\Roles::cases() as $role)
+                    <option value="{{ $role }}" id="role" name="role">{{ $role }}</option>
+                @endforeach
+            </select>
+
             <label class="label">Password</label>
             <input type="password" name="password" class="input w-full @error('password') input-error @enderror" placeholder="Password"/>
 
