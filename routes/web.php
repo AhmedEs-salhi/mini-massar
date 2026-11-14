@@ -21,8 +21,25 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    # Authenticated Student Routes
+    Route::middleware('role:student')->group(function () {
         Route::get('student/home', function () {
             return view('student.home');
-        })->middleware('role:student')->name('student.home');
+        })->name('student.home');
+    });
+
+    # Authenticated Admin Routes
+    Route::middleware('role:admin')->group(function () {
+        Route::get('admin/home', function () {
+            return view('admin.home');
+        })->name('admin.home');
+    });
+
+    # Authenticated Teachers Routes
+    Route::middleware('role:teacher')->group(function () {
+        Route::get('teacher/home', function () {
+            return view('teacher.home');
+        })->name('teacher.home');
+    });
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
